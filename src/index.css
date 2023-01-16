@@ -3,5 +3,5 @@
 @tailwind utilities;
 @font-face {
   font-family: 'WesternBangBang';
-  src: url('../public/WesternBangBang-Regular.ttf');
+  src: url('../WesternBangBang-Regular.ttf');
 }
