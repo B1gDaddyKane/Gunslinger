@@ -12,6 +12,9 @@ const Navbar = () => {
       <a className="pt-2 col-start-8 text-center" href="/">
         Sign in
       </a>
+      <a className="pt-2 col-start-8 text-center" href="/gunslinger">
+        Gunslinger generator
+      </a>
     </nav>
   );
 };
