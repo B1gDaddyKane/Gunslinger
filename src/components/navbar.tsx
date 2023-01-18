@@ -1,3 +1,5 @@
+import TagPickerComponent from "./tagpicker";
+
 const Navbar = () => {
   return (
     <nav className="grid grid-cols-8 gap-10 bg-optionsGrey w-full text-paper-500 p-2">
