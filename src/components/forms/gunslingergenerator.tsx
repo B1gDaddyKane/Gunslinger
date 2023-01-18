@@ -35,51 +35,43 @@ const GunslingerComponent: React.FC = () => {
     }
 
     async function generateDescription() {
-        try {
-            const res = await fetch('https://api.openai.com/v1/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${OPENAI_API_KEY}`,
-                },
-                body: JSON.stringify({
-                    model: 'text-davinci-003',
-                    prompt,
-                    temperature: 0.7,
-                    max_tokens: 256,
-                    top_p: 1,
-                    frequency_penalty: 0,
-                    presence_penalty: 0,
-                }),
-            });
-            const json = await res.json();
-            console.log(json);
-            setResponse(json.choices[0].text);
-        } catch (err: any) {
-            setError(err.toString());
-        }
+        const res = await fetch('https://api.openai.com/v1/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${OPENAI_API_KEY}`,
+            },
+            body: JSON.stringify({
+                model: 'text-davinci-003',
+                prompt,
+                temperature: 0.7,
+                max_tokens: 256,
+                top_p: 1,
+                frequency_penalty: 0,
+                presence_penalty: 0,
+            }),
+        })
+            .then((response) => response.json())
+            .catch((error) => setError(error.toString()));
+        setResponse(res.choices[0].text);
     }
     async function generateImage() {
-        try {
-            const res = await fetch('https://api.openai.com/v1/images/generations', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${OPENAI_API_KEY}`,
-                },
-                body: JSON.stringify({
-                    prompt: imageDescription,
-                    size: '256x256',
-                    response_format: 'url',
-                    n: 1,
-                }),
-            });
-            const json = await res.json();
-            console.log(json);
-            setUrl(json.data[0].url);
-        } catch (err: any) {
-            setError(err.toString());
-        }
+        const res = await fetch('https://api.openai.com/v1/images/generations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${OPENAI_API_KEY}`,
+            },
+            body: JSON.stringify({
+                prompt: imageDescription,
+                size: '256x256',
+                response_format: 'url',
+                n: 1,
+            }),
+        })
+            .then((response) => response.json())
+            .catch((error) => setError(error.toString()));
+        setUrl(res.data[0].url);
     }
     return (
         <div>
